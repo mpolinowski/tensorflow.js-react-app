@@ -6,7 +6,7 @@ This template app can be used for real time object detection by leveraging the T
 
 * __Step 1.__ Clone this repository: https://github.com/mpolinowski/tensorflow-js-react-app
 * __Step 2.__ Install Node https://nodejs.org/en/
-* __Step 3.__ Install App Depdendencies `npm install`
+* __Step 3.__ Install App Dependencies `npm install`
 * __Step 4.__ Copy your [exported Tensorflow.js model](https://mpolinowski.github.io/devnotes/2021-11-11--tensorflow-crash-course-part-iv) to `public/model`:
 
 
@@ -31,9 +31,19 @@ __Note__ this only works when you access the App via `http://localhost:3000/`. Y
 
 
 
-* __Step 6.__ Fix the bounding box - see [Github Issue](https://github.com/nicknochnack/TFODApp/issues/1)
-* __Step 7.__ Run the App `npm start`
-* __Step 8.__ The Tensorflow detection returns an Object that contains a lot of different data. Find the correct one by incrementing `console.log(await obj[0].array())` in `src/App.js` and check the output:
+* __Step 6.__ Edit `src/utilities.js` to add your labels - in my case I only have one labeled object in my Tensorflow model. Add all of yours inside the __Label Map__:
+
+
+```js
+const labelMap = {
+    1:{name:'INSTAR', color:'red'}
+}
+```
+
+
+* __Step 7.__ Fix the bounding box - see [Github Issue](https://github.com/nicknochnack/TFODApp/issues/1)
+* __Step 8.__ Run the App `npm start`
+* __Step 9.__ The Tensorflow detection returns an Object that contains a lot of different data. Find the correct one by incrementing `console.log(await obj[0].array())` in `src/App.js` and check the output:
 
 
 For me the position was `1` for __confidence scores__, `2` for __object classes__ and `4` for the corner position of the __boundary box__ - adjust these values accordingly in `src/App.js`
